@@ -20,6 +20,13 @@ public class MainMenu {
 
             }
         });
+        recipeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(() -> new RecipeManager().showMenu());
+
+            }
+        });
     }
 
     public void showMenu(){

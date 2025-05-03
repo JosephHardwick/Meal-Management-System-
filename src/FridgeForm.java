@@ -32,7 +32,7 @@ public class FridgeForm {
     }
 
     public void showMenu(){
-        JFrame frame = new JFrame("Main Menu");
+        JFrame frame = new JFrame("Meal Management System");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
