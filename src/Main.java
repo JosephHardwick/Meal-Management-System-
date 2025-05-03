@@ -36,7 +36,7 @@ public class Main {
                 String name = rs.getString("NAME");
 
                 // print names and prices and left align them
-                System.out.println(name);;
+               // System.out.println(name);;
             }
         }
         catch (Exception e)

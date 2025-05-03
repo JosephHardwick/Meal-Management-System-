@@ -3,6 +3,8 @@ import oracle.jdbc.OracleResultSet;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 
 public class RecipeManager {
@@ -13,6 +15,17 @@ public class RecipeManager {
 
     public RecipeManager() {
         populateTable();
+        recipeTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int row = recipeTable.getSelectedRow();
+                String name = (String) recipeTable.getValueAt(row, 0);
+                SwingUtilities.invokeLater(() -> new RecipeView(name).showMenu());
+
+
+            }
+        });
     }
 
     public void showMenu(){
@@ -56,8 +69,7 @@ public class RecipeManager {
                 // print names and prices and left align them
                 // listModel.addElement(name);
                 tableModel.addRow(new Object[]{name, category});
-                System.out.println("name is:");
-                System.out.println(name);;
+
             }
         }
         catch (Exception e)
