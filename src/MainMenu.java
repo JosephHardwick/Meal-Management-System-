@@ -27,6 +27,13 @@ public class MainMenu {
 
             }
         });
+        mealPlanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(() -> new MealPlan().showMenu());
+
+            }
+        });
     }
 
     public void showMenu(){

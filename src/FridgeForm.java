@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -34,10 +35,12 @@ public class FridgeForm {
     public void showMenu(){
         JFrame frame = new JFrame("Meal Management System");
         frame.setContentPane(mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        table1.setShowGrid(true);
+        table1.setGridColor(Color.BLACK);
     }
 
     private void removeFromFridge(){
