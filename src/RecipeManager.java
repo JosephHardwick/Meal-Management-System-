@@ -2,16 +2,16 @@ import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
 
-import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.util.Vector;
-import java.util.List;
 
 public class RecipeManager {
     private JTable recipeTable;
@@ -19,6 +19,8 @@ public class RecipeManager {
     private JButton addRecipeButton;
     private JPanel mainPanel;
     private JTextField searchField;
+    private JList ingredientList;
+    private JList categoryList;
     private DefaultTableModel tableModel;
     private Vector<Vector<Object>> originalData;
 
@@ -32,6 +34,19 @@ public class RecipeManager {
                 int row = recipeTable.getSelectedRow();
                 String name = (String) recipeTable.getValueAt(row, 0);
                 SwingUtilities.invokeLater(() -> new RecipeView(name).showMenu());
+            }
+        });
+        ingredientList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                filterTable();
+            }
+        });
+
+        categoryList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                filterTable();
             }
         });
     }
@@ -57,11 +72,19 @@ public class RecipeManager {
 
     private void filterTable() {
         String searchText = searchField.getText().toLowerCase();
+        Object selectedCategory = categoryList.getSelectedValue();
+        String categoryFilter = selectedCategory != null ? selectedCategory.toString().toLowerCase() : "";
+        Object selectedIngredient = ingredientList.getSelectedValue();
+        String ingredientFilter = selectedIngredient != null ? selectedIngredient.toString().toLowerCase() : "";
+
         Vector<Vector<Object>> filteredData = new Vector<>();
 
         for (Vector<Object> row : originalData) {
             String name = row.get(0).toString().toLowerCase();
-            if (name.contains(searchText)) {
+            String category = row.get(1).toString().toLowerCase();
+
+
+            if (name.contains(searchText) && (categoryFilter.isEmpty() || category.contains(categoryFilter))) {
                 filteredData.add(row);
             }
         }
@@ -80,7 +103,8 @@ public class RecipeManager {
         conn = ConnectDb.setupConnection();
 
         try  {
-            String sqlStatement = "SELECT name, category FROM meal";
+            String sqlStatement = "SELECT meal.name, category, ingredient.name FROM meal LEFT JOIN mealingredient ON meal.mealID = mealingredient.meal_id " +
+                    "LEFT JOIN ingredient ON mealingredient.ingredient_id = ingredient.ingredientID";
             pst = (OraclePreparedStatement) conn.prepareStatement(sqlStatement);
             rs = (OracleResultSet) pst.executeQuery();
 

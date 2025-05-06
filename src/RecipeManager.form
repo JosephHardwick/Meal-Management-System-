@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="RecipeManager">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
@@ -10,7 +10,7 @@
     <children>
       <component id="dbcca" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Recipe Manager"/>
@@ -18,7 +18,7 @@
       </component>
       <scrollpane id="440a6">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
@@ -31,7 +31,7 @@
       </scrollpane>
       <component id="3be1a" class="javax.swing.JButton" binding="editRecipeButton" default-binding="true">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Edit Recipe"/>
@@ -39,7 +39,7 @@
       </component>
       <component id="6c092" class="javax.swing.JButton" binding="addRecipeButton" default-binding="true">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Add Recipe"/>
@@ -47,11 +47,148 @@
       </component>
       <component id="62675" class="javax.swing.JTextField" binding="searchField">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
         <properties/>
+      </component>
+      <scrollpane id="5347e">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="71049" class="javax.swing.JList" binding="ingredientList">
+            <constraints/>
+            <properties>
+              <model>
+                <item value="*"/>
+                <item value="Alfredo Sauce"/>
+                <item value="Angel Hair Pasta"/>
+                <item value="Apple"/>
+                <item value="Asparagus"/>
+                <item value="BBQ Sauce"/>
+                <item value="Bacon"/>
+                <item value="Banana"/>
+                <item value="Blue Cheese"/>
+                <item value="Blueberry"/>
+                <item value="Bread"/>
+                <item value="Broccoli"/>
+                <item value="Butter"/>
+                <item value="Caesar Dressing"/>
+                <item value="Cane Sugar"/>
+                <item value="Carrot"/>
+                <item value="Celery"/>
+                <item value="Cheddar Cheese"/>
+                <item value="Cheerios"/>
+                <item value="Chicken Breast"/>
+                <item value="Chicken Nugget"/>
+                <item value="Chocolate chips"/>
+                <item value="Cinnamon"/>
+                <item value="Cracker"/>
+                <item value="Croutons"/>
+                <item value="Cucumber"/>
+                <item value="Dough"/>
+                <item value="Egg"/>
+                <item value="Feta Cheese"/>
+                <item value="Flour"/>
+                <item value="Garlic"/>
+                <item value="Ground Beef"/>
+                <item value="Hashbrowns"/>
+                <item value="Lemon"/>
+                <item value="Lettuce"/>
+                <item value="Macaroni"/>
+                <item value="Mayonnaise"/>
+                <item value="Milk"/>
+                <item value="Mozzerella Cheese"/>
+                <item value="Mustard"/>
+                <item value="Olive Oil"/>
+                <item value="Onion"/>
+                <item value="Parmesan Cheese"/>
+                <item value="Pasta Sauce"/>
+                <item value="Peanut Butter"/>
+                <item value="Peanuts"/>
+                <item value="Pepper"/>
+                <item value="Pepperoni"/>
+                <item value="Pineapple"/>
+                <item value="Pizza Sauce"/>
+                <item value="Pork Chops"/>
+                <item value="Potato"/>
+                <item value="Provolone Cheese"/>
+                <item value="Raisin"/>
+                <item value="Ranch Dressing"/>
+                <item value="Raspberry"/>
+                <item value="Rice"/>
+                <item value="Salmon"/>
+                <item value="Salt"/>
+                <item value="Sausage"/>
+                <item value="Shrimp"/>
+                <item value="Sour Cream"/>
+                <item value="Squash"/>
+                <item value="T-bone Steak"/>
+                <item value="Tobasco Sauce"/>
+                <item value="Tomato"/>
+                <item value="Turkey Slices"/>
+                <item value="Whipped Cream"/>
+              </model>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="f43ed" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Enter Recipe Name:"/>
+        </properties>
+      </component>
+      <component id="456ff" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Enter Ingredient(s):"/>
+        </properties>
+      </component>
+      <scrollpane id="1f972">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="aa77e" class="javax.swing.JList" binding="categoryList">
+            <constraints/>
+            <properties>
+              <model>
+                <item value="Appetizer"/>
+                <item value="Bread"/>
+                <item value="Breakfast"/>
+                <item value="Dessert"/>
+                <item value="Dinner"/>
+                <item value="Lunch"/>
+                <item value="Main Dish - Beef"/>
+                <item value="Main Dish - Pork"/>
+                <item value="Main Dish - Seafood"/>
+                <item value="Salad"/>
+                <item value="Snack"/>
+                <item value="Soup"/>
+              </model>
+              <selectionMode value="0"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="272d5" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Enter Category:"/>
+        </properties>
       </component>
     </children>
   </grid>
