@@ -1,14 +1,13 @@
 create table INGREDIENT
 (
-    INGREDIENTID NUMBER       not null
-        primary key,
-    NAME         VARCHAR2(50) not null,
-    PROTEIN      VARCHAR2(50),
-    SUGAR        VARCHAR2(50),
-    SODIUM       VARCHAR2(50),
-    FAT          VARCHAR2(50),
-    CALORIES     VARCHAR2(50),
-    HAS          NUMBER(1) default 0
+    INGREDIENTID NUMBER not null primary key,
+    NAME VARCHAR2(50) not null,
+    PROTEIN VARCHAR2(50),
+    SUGAR VARCHAR2(50),
+    SODIUM VARCHAR2(50),
+    FAT VARCHAR2(50),
+    CALORIES VARCHAR2(50),
+    HAS NUMBER(1) default 0
 )
 /
 
@@ -26,13 +25,13 @@ END;
 
 create table MEAL
 (
-    MEALID      NUMBER       not null
-        primary key,
-    NAME        VARCHAR2(50) not null,
-    CATEGORY    VARCHAR2(50) not null,
+    MEALID NUMBER not null primary key,
+    NAME VARCHAR2(50) not null,
+    CATEGORY VARCHAR2(50) not null,
     INSTRUCTION VARCHAR2(500)
 )
 /
+
 --auto increment ID
 create or replace trigger MEAL_TRIGGER
     before insert
@@ -47,12 +46,8 @@ END;
 
 create table MEALINGREDIENT
 (
-    MEAL_ID       NUMBER not null
-        references HARDWICKJ545.MEAL
-            on delete cascade,
-    INGREDIENT_ID NUMBER not null
-        references HARDWICKJ545.INGREDIENT
-            on delete cascade,
+    MEAL_ID NUMBER not null references HARDWICKJ545.MEAL on delete cascade,
+    INGREDIENT_ID NUMBER not null references HARDWICKJ545.INGREDIENT  on delete cascade,
     primary key (MEAL_ID, INGREDIENT_ID)
 )
 /
