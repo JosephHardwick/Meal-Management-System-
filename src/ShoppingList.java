@@ -67,10 +67,6 @@ public class ShoppingList {
 
 
 
-
-
-
-
             while (rs.next()) {
 
                 System.out.println("add output to list");
