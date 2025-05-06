@@ -74,8 +74,7 @@ public class RecipeManager {
         String searchText = searchField.getText().toLowerCase();
         Object selectedCategory = categoryList.getSelectedValue();
         String categoryFilter = selectedCategory != null ? selectedCategory.toString().toLowerCase() : "";
-        Object selectedIngredient = ingredientList.getSelectedValue();
-        String ingredientFilter = selectedIngredient != null ? selectedIngredient.toString().toLowerCase() : "";
+        java.util.List<Object> selectedIngredients = ingredientList.getSelectedValuesList();
 
         Vector<Vector<Object>> filteredData = new Vector<>();
 
@@ -83,8 +82,14 @@ public class RecipeManager {
             String name = row.get(0).toString().toLowerCase();
             String category = row.get(1).toString().toLowerCase();
 
+            boolean name_search = name.contains(searchText);
+            boolean category_search = categoryFilter.isEmpty() || category.contains(categoryFilter);
 
-            if (name.contains(searchText) && (categoryFilter.isEmpty() || category.contains(categoryFilter))) {
+            boolean ingredients_search = selectedIngredients.isEmpty() || //if nothing is selected
+                    meal_ingredients.stream().anyMatch(mealRow -> mealRow.get(0).equals(row.get(0)) && //check if meal name matches between meal_ingredients and the row
+                            selectedIngredients.stream().allMatch(ingredient -> mealRow.contains(ingredient)));//additonally check if all selected ingredients are in the meal_ingredients vector
+
+            if (name_search && category_search && ingredients_search) {
                 filteredData.add(row);
             }
         }
@@ -92,27 +97,63 @@ public class RecipeManager {
         tableModel.setDataVector(filteredData, getColumnNames());
     }
 
+
+    private Vector<Vector<Object>> meal_ingredients; //store meals and associated ingredients
     private void populateTable() {
         String[] columnNames = {"name", "category"};
         tableModel = new DefaultTableModel(columnNames, 0);
         originalData = new Vector<>();
+        meal_ingredients = new Vector<>();
 
         Connection conn = null;
         OraclePreparedStatement pst = null;
         OracleResultSet rs = null;
         conn = ConnectDb.setupConnection();
 
-        try  {
-            String sqlStatement = "SELECT meal.name, category, ingredient.name FROM meal LEFT JOIN mealingredient ON meal.mealID = mealingredient.meal_id " +
-                    "LEFT JOIN ingredient ON mealingredient.ingredient_id = ingredient.ingredientID";
+        try {
+            String sqlStatement = "SELECT meal.name AS meal_name, category, ingredient.name AS ingredient_name " +
+                    "FROM meal LEFT JOIN mealingredient ON meal.mealID = mealingredient.meal_id LEFT JOIN ingredient ON mealingredient.ingredient_id = ingredient.ingredientID";
             pst = (OraclePreparedStatement) conn.prepareStatement(sqlStatement);
             rs = (OracleResultSet) pst.executeQuery();
 
             while (rs.next()) {
-                Vector<Object> row = new Vector<>();
-                row.add(rs.getString("name"));
-                row.add(rs.getString("category"));
-                originalData.add(row);
+                String mealName = rs.getString("meal_name");
+                String category = rs.getString("category");
+                String ingredient = rs.getString("ingredient_name");
+
+                // Add to originalData for table display
+                Vector<Object> existingRow = null;
+                for (Vector<Object> row : originalData) {
+                    if (row.get(0).equals(mealName)) {
+                        existingRow = row;
+                        break;
+                    }
+                }
+
+                if (existingRow == null) {
+                    Vector<Object> row = new Vector<>();
+                    row.add(mealName);
+                    row.add(category);
+                    originalData.add(row);
+                }
+
+
+                Vector<Object> existingMealRow = null;//add ingredients to meal_ingredients vector
+                for (Vector<Object> mealRow : meal_ingredients) {
+                    if (mealRow.get(0).equals(mealName)) {
+                        existingMealRow = mealRow;
+                        break;
+                    }
+                }
+
+                if (existingMealRow == null) {//if meal name not found in meal_ingredients vector, create a new row
+                    Vector<Object> mealRow = new Vector<>();
+                    mealRow.add(mealName);
+                    mealRow.add(ingredient);
+                    meal_ingredients.add(mealRow);
+                } else {
+                    existingMealRow.add(ingredient);//if meal name found, add the ingredient to the existing row
+                }
             }
 
             rs.close();

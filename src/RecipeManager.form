@@ -64,7 +64,6 @@
             <constraints/>
             <properties>
               <model>
-                <item value="*"/>
                 <item value="Alfredo Sauce"/>
                 <item value="Angel Hair Pasta"/>
                 <item value="Apple"/>
