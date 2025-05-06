@@ -24,7 +24,7 @@ BEGIN
 END;
 /
 
-create table HARDWICKJ545.MEAL
+create table MEAL
 (
     MEALID      NUMBER       not null
         primary key,
@@ -34,7 +34,7 @@ create table HARDWICKJ545.MEAL
 )
 /
 --auto increment ID
-create or replace trigger HARDWICKJ545.MEAL_TRIGGER
+create or replace trigger MEAL_TRIGGER
     before insert
     on HARDWICKJ545.MEAL
     for each row
@@ -45,7 +45,7 @@ BEGIN
 END;
 /
 
-create table HARDWICKJ545.MEALINGREDIENT
+create table MEALINGREDIENT
 (
     MEAL_ID       NUMBER not null
         references HARDWICKJ545.MEAL
@@ -56,6 +56,8 @@ create table HARDWICKJ545.MEALINGREDIENT
     primary key (MEAL_ID, INGREDIENT_ID)
 )
 /
+
+
 
 
 
