@@ -29,6 +29,10 @@ General Use of Program:
      to search for a recipe by name, type it in the search field at the very top
      to see all the recipes for a certain catagory, select the catagory from the 'enter catagory' list.
      to deselect it, ctrl click
+     to search for a recipe by ingredient, select the ingredient from the 'enter ingredient' list
+     to select multiple ingredients, ctrl click
+     to deselect an ingredient, ctrl click
+     these 3 searches can be used in conjunction with each other
   3. Meal Planner
      to create a meal plan and generate a shopping list for the week, select Meal Plan from the main menu
      from there, double click each cell and select the meal you desire then press 'add to meal plan'
