@@ -151,6 +151,10 @@ public class FridgeForm {
         JComboBox<String> foodDropdown = new JComboBox<>();
         JButton selectButton = new JButton("Add to Fridge");
 
+        //center button and label horizontally
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        selectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         // Populate dropdown with available foods from DB
         Connection conn = null;
         OraclePreparedStatement pst = null;
